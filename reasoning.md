@@ -28,9 +28,13 @@ Giving them Dodge up front removes this erratic power spike and gives them one o
 
 **Cutthroats and Outlaws have reduced Defense and get more later**
 
-Again, Nomads are in a pretty solid spot right now, so the difficulty of the fights shouldn't be _drastically_ different. Lowering their base defense helps reduce the impact of Dodge early on, and slightly increasing it later helps them scale a bit as the campaign progresses. They'll never have quite as much Defense as they do in vanilla, in an effort to truly soften the curve and not give quite so drastic a cut-off to Southern sellswording.
+Again, Nomads are in a pretty solid spot right now, so the difficulty of the fights shouldn't be _drastically_ different. Lowering their base defense helps reduce the impact of Dodge early on, and slightly increasing it later helps them scale a bit as the campaign progresses. Outlaws will eventually get another boost that returns them to their vanilla defense value, so late game fights should stay mostly untouched as players enter the beginning of the crisis.
 
 My hope and intent is that leaving Nomad Leaders, Archers, and specialty units (e.g. Blade Dancers) untouched allows late game Nomads to continue to offer a satisfying challenge while softening the ramp-up to these fights.
+
+**Nomads no longer ignore morale checks when Indebted die**
+
+Nomads and Indebted only spawn together in the Indebted Uprising contract, where they effectively act as "powered up" Indebted. The theming of ignoring morale checks didn't make sense here.
 
 ## Serpents
 

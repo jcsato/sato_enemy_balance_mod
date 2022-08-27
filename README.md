@@ -29,7 +29,8 @@ This mod only changes enemies themselves - for more holistic balance changes, lo
 - Nomad Cutthroats and Outlaws have the Dodge perk starting from day 1
 - Nomad Cutthroat Melee and Ranged Defense reduced to -5 (down from 5)
 - Nomad Outlaw Melee and Ranged Defense reduced to 5 (down from 15)
-- At days 35 and 40, respectively, Cutthroats and Outlaws gain +5 Melee and Ranged Defense, and Outlaws gain +15 Initiative
+- At day 35, respectively, Cutthroats and Outlaws gain +5 Melee and Ranged Defense, and Outlaws gain another +5 at day 75
+- Nomads no longer ignore morale checks for the deaths of friendly Indebted units
 
 <img src="./KeyArtGilded.png" width="1200">
 

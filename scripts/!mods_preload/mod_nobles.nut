@@ -34,7 +34,7 @@
 		if (Math.rand(1, 100) <= 90)
 			getSprite("surcoat").setBrush("surcoat_" + (banner < 10 ? "0" + banner : banner));
 
-		r = Math.rand(1, 5);
+		r = Math.rand(1, 4);
 
 		if (r == 1)
 			m.Items.equip(new("scripts/items/weapons/military_pick"));
@@ -481,25 +481,25 @@
 				armor.setVariant(84);
 			else if (armorList[r] == "scripts/items/armor/noble_mail_armor") {
 				if (banner == 1)
-					armor.setVariant(915); // Blue-Red
+					armor.setVariant(215); // Blue-Red
 				else if (banner == 2)
-					armor.setVariant(919); // Blue
+					armor.setVariant(219); // Blue
 				else if (banner == 3)
-					armor.setVariant(910); // White
+					armor.setVariant(210); // White
 				else if (banner == 4)
-					armor.setVariant(916); // Red
+					armor.setVariant(216); // Red
 				else if (banner == 5)
-					armor.setVariant(918); // Green-White
+					armor.setVariant(218); // Green-White
 				else if (banner == 6)
-					armor.setVariant(912); // Blue-White
+					armor.setVariant(212); // Blue-White
 				else if (banner == 7)
-					armor.setVariant(913); // Green-Yellow-Blue
+					armor.setVariant(213); // Green-Yellow-Blue
 				else if (banner == 8)
-					armor.setVariant(911); // Black
+					armor.setVariant(211); // Black
 				else if (banner == 9)
-					armor.setVariant(914); // Red-Yellow
+					armor.setVariant(214); // Red-Yellow
 				else if (banner == 10)
-					armor.setVariant(917); // Green-Yellow
+					armor.setVariant(217); // Green-Yellow
 			}
 		}
 		m.Items.equip(armor);
