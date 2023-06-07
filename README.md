@@ -24,12 +24,17 @@ This mod only changes enemies themselves - for more holistic balance changes, lo
 - Serpents Bite skill now has 90% armor effectiveness (up from 75%)
 - Serpents now have the Executioner perk
 
+<img src="./KeyArtLindwurms.png" width="1200">
+
+- Lindwurms' Gorge skill now has 25% armor ignore (down from 35%)
+- Lindwurm unit cost increased to 105 (up from 90)
+
 <img src="./KeyArtNomads.png" width="1200">
 
 - Nomad Cutthroats and Outlaws have the Dodge perk starting from day 1
 - Nomad Cutthroat Melee and Ranged Defense reduced to -5 (down from 5)
 - Nomad Outlaw Melee and Ranged Defense reduced to 5 (down from 15)
-- At day 35, respectively, Cutthroats and Outlaws gain +5 Melee and Ranged Defense, and Outlaws gain another +5 at day 75
+- At day 35 Cutthroats and Outlaws gain +5 Melee and Ranged Defense, and another +5 at day 70
 - Nomads no longer ignore morale checks for the deaths of friendly Indebted units
 
 <img src="./KeyArtGilded.png" width="1200">
@@ -42,11 +47,11 @@ This mod only changes enemies themselves - for more holistic balance changes, lo
 - Barbarian Thralls, Reavers, Chosen, and Drummers no longer have the Brawny perk
 - Beastmasters and Drummers no longer have the Dodge perk
 - Drummers no longer have the Recover perk
-- Reaver and Chosen Fatigue Recovery per turn reduced to 15 (down from 20)
+- Reaver and Chosen Fatigue Recovery per turn reduced to 17 (down from 20)
 - Reaver Resolve reduced to 60 (down from 80), Chosen Resolve reduced to 75 (down from 90)
-- Chosen unit cost increased to 50 (up from 35)
+- Chosen unit cost increased to 45 (up from 35)
 - Drummers now spawn closer to the frontline, and will move forward with the rest of the group like Beastmasters do
-- The Drums of War skill no longer reduces Fatigue directly; instead, it applies an effect that lasts for 2 turns and gives +5 Fatigue Recovery per turn and +15 Resolve
+- The Drums of War skill no longer reduces Fatigue directly; instead, it applies an effect that lasts for 2 turns and gives +3 Fatigue Recovery per turn and +15 Resolve
 
 <img src="./KeyArtNobles.png" width="1200">
 

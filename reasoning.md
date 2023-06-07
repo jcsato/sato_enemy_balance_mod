@@ -4,6 +4,50 @@ Balance changes are always going to be controversial in a game as tightly design
 
 My goal with all of these changes was not to make the game easier or harder, but rather to smooth out the difficulty curve of the game and reduce the peaks and valleys that come with certain enemy types.
 
+## Serpents
+
+**Serpent Resolve lowered**
+
+100 Resolve is far too much for such an early game opponent, and is a leftover stat from the Blazing Deserts beta when they were much weaker and needed the help. In their current iteration, Serpents exist with a balance of Hitpoints, Resolve, and armor such that they basically always die before they break or route. Given that they don't seem to be apex predators like Lindwurms or Unholds, nor are they magical or alien like Alps, Hexen, or Schrats, it's both mechanically and thematically appropriate to lower this a bit.
+
+**Decrease Serpent damage, increase Serpent armor effectiveness, Serpents now have Executioner**
+
+Serpents have a sort of inverse inflection point to Nomads; early game they're so absurdly threatening as to not be worth fighting at all, and late game they don't offer much of a challenge at all. This largely comes down to their high base damage (as much as a Two Handed Saif!) and relatively low armor effectiveness.
+
+Reducing their raw damage makes them less deadly in the very early parts of a campaign, when players have limited armor. Upping their armor effectiveness helps them better keep pace against armor when players _do_ start to get better gear, and Executioner allows them to more effectively threaten the durable bros they pull in and focus fire on.
+
+## Lindwurms
+
+**Increased unit costs**
+
+Lindwurms where always a powerful foe, but have had multiple buffs, fixes, and AI improvements to make them stronger since their release. They haven't had commensurate nerfs to check this power creep, and thus are a greater threat than they were balanced around being and are more difficult than intended.
+
+Raising their unit cost reduces the size of groups players encounter on a given day, giving them more opportunities to fight smaller stacks and build up before fighting "the real deal".
+
+**Decrease Gorge armor ignore**
+
+The Gorge skill was intended to have 40% armor ignore, but was bugged and had 0%. Eventually, well after other stats were adjusted for balance, this bug was fixed, with armor ignore reduced to 35%. This still represents a massive increase in damage over what the skill was balanced around. Additionally, the amount of damage through armor Lindwurms do makes their acid mechanic mostly irrelevant.
+
+Reducing Gorge's armor ignore brings the skill more inline with the numbers it was originally balanced around, and generally makes armor more relevant to the fight.
+
+## Nomads
+
+**Cutthroats and Outlaws always have Dodge**
+
+Nomads are in an ok place, balance-wise. That said, the massive difficulty spike at day 40 when Outlaws get Dodge and Leaders get Nimble is a little janky. It encourages a phenomena where players try to snowball campaigns by fighting Nomads non-stop in the first 40 days, then leaving the South for most of the rest of their campaign once they get Dodge.
+
+Giving them Dodge up front smooths out the power spike a bit and gives them one of their most unique faction abilities from the get go.
+
+**Cutthroats and Outlaws have reduced Defense and get more later**
+
+Again, Nomads are in a pretty solid spot right now, so the difficulty of the fights shouldn't be _drastically_ different. Lowering their base defense helps reduce the impact of Dodge early on, and slightly increasing it later helps them scale a bit as the campaign progresses. The big late game fights that offer satisfying challenges should stay mostly untouched as players enter the beginning of the crisis.
+
+My hope and intent is that leaving Nomad Leaders, Archers, and specialty units (e.g. Blade Dancers) untouched allows late game Nomads to continue to offer a satisfying challenge while softening the ramp-up to these fights.
+
+**Nomads no longer ignore morale checks when Indebted die**
+
+Nomads and Indebted only spawn together in the Indebted Uprising contract, where they effectively act as "powered up" Indebted. The theming of ignoring morale checks didn't make sense here.
+
 ## The Gilded
 
 **Polearm Conscripts no longer have Nimble**
@@ -18,36 +62,6 @@ Indebted are a non-unit - they don't pose any particular threat or offer any rea
 
 Thematically, it also adds a bit of much needed characterization to Indebted, showing them as desperately clutching at survival as best they can.
 
-## Nomads
-
-**Cutthroats and Outlaws always have Dodge**
-
-Nomads are in an ok place, balance-wise. That said, the massive difficulty spike at day 40 when Outlaws get Dodge and Leaders get Nimble is a little janky. It encourages a phenomena where players try to snowball campaigns by fighting Nomads non-stop in the first 40 days, then leaving the South for most of the rest of their campaign once they get Dodge.
-
-Giving them Dodge up front removes this erratic power spike and gives them one of their most unique faction abilities from the get go.
-
-**Cutthroats and Outlaws have reduced Defense and get more later**
-
-Again, Nomads are in a pretty solid spot right now, so the difficulty of the fights shouldn't be _drastically_ different. Lowering their base defense helps reduce the impact of Dodge early on, and slightly increasing it later helps them scale a bit as the campaign progresses. Outlaws will eventually get another boost that returns them to their vanilla defense value, so late game fights should stay mostly untouched as players enter the beginning of the crisis.
-
-My hope and intent is that leaving Nomad Leaders, Archers, and specialty units (e.g. Blade Dancers) untouched allows late game Nomads to continue to offer a satisfying challenge while softening the ramp-up to these fights.
-
-**Nomads no longer ignore morale checks when Indebted die**
-
-Nomads and Indebted only spawn together in the Indebted Uprising contract, where they effectively act as "powered up" Indebted. The theming of ignoring morale checks didn't make sense here.
-
-## Serpents
-
-**Serpent Resolve lowered**
-
-I have no clue why Serpents ever had 100 Resolve. Beasts often need the help, as they tend to have low armor, but Serpents exist at a balance of Hitpoints, armor, and Resolve such that they basically always die before they break or route. Given that they don't seem to be alpha monsters in the way Lindwurms or Unholds are, nor are they magical or alien in the way Alps, Hexen, or Schrats are, it felt both mechanically and thematically appropriate to lower this a bit.
-
-**Decrease Serpent damage, increase Serpent armor effectiveness, Serpents now have Executioner**
-
-Serpents have a sort of inverse inflection point to Nomads; early game they're so absurdly threatening as to not be worth fighting at all, and late game they don't offer much of a challenge at all. This largely comes down to their high base damage (as much as a Two Handed Saif!) and relatively low armor effectiveness.
-
-Reducing their raw damage should make them less deadly in the very early parts of a campaign where you have little armor to speak of. Upping their armor effectiveness helps them not lose too much pace against armor when players _do_ start to better gear, and Executioner allows them to more effectively threaten the durable bros they do pull in and focus fire.
-
 ## Barbarians
 
 **Barbarians no longer have Brawny or Dodge, Reavers and Chosen have reduced Fatigue Recovery**
@@ -60,7 +74,7 @@ Removing Brawny and lowering their recovery gives the player more opportunities 
 
 **Reaver and Chosen Resolve reduced**
 
-In addition to having the best average armor, the most damaging weapons, the best Fatigue management, and the most threatening unit compositions of any faction in the game, Chosen have exceptionally high Resolve. It's a bit much.
+In addition to having the best average armor, the most damaging weapons, the best Fatigue management, and the most threatening unit compositions of any faction in the game, Barbarians also have exceptionally high Resolve. It's a bit much.
 
 **Drums of War increased Fatigue Recovery and Resolve instead of directly decreasing Fatigue**
 
@@ -96,7 +110,7 @@ Right now, Standard Bearers do nothing if a Knight is on the field. Given that t
 
 **Knights are now special snowflakes**
 
-Knights are supposed to be the lynchpin of Noble armies, but in the current balance they're little more than Footmen with better gear. They don't boast particularly high damage output, but their ability to hold the line is severely hampered by how brittle Footmen are.
+Knights are supposed to be the lynchpin of Noble armies, but in the current balance they're little more than Footmen with better gear. They don't boast particularly high damage output, but their ability to hold the line is severely hampered by how brittle the Footmen around them are.
 
 These changes are intended to make Knights the "boss" units I feel they were intended to be. My hope is that every time you fight a Knight, you feel a bit of trepidation and uncertainty about what you're going to face. Will this one be a maul-wielding Lone Wolf, crushing through armor and flesh? An unbreakable shield bearer, inspiring his men with a Fortified Mind? A skillful Duelist? A Head Hunter with a Three Headed Flail?
 

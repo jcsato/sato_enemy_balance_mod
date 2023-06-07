@@ -1,1 +1,10 @@
-::mods_registerMod("sato_enemy_balance", 1.2, "Sato's Enemy Balance");
+::mods_registerMod("sato_enemy_balance", 1.3, "Sato's Enemy Balance");
+
+::mods_queue("sato_enemy_balance", null, function() {
+	::include("script_hooks/mod_seb_barbarians");
+	::include("script_hooks/mod_seb_gilded");
+	::include("script_hooks/mod_seb_lindwurm");
+	::include("script_hooks/mod_seb_nobles");
+	::include("script_hooks/mod_seb_nomads");
+	::include("script_hooks/mod_seb_serpents");
+});
