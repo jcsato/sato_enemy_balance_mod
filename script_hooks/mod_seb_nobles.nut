@@ -16,17 +16,17 @@ local equipShield = function(items, banner) {
 
 local assignFootmanEquipment = function() {
 	local r;
-	local banner = 3;
+	local banner = getFaction();
 
 	local shouldUpgradeEquipment = World.FactionManager.isGreaterEvil();
 
-	if (!Tactical.State.isScenarioMode())
+	if (!Tactical.State.isScenarioMode() && banner != 0)
 		banner = World.FactionManager.getFaction(getFaction()).getBanner();
-	else {
-		banner = getFaction();
+	else
 		shouldUpgradeEquipment = true;
-	}
 
+	if (banner < 1)
+		banner = 4;
 
 	m.Surcoat = banner;
 
@@ -76,6 +76,7 @@ local assignFootmanEquipment = function() {
 
 	r = Math.rand(0, armorList.len() - 1);
 	local armor = new(armorList[r]);
+
 	if (armorList[r] == "scripts/items/armor/mail_hauberk")
 		armor.setVariant(28);
 	else if (armorList[r] == "scripts/items/armor/footman_armor")
@@ -100,8 +101,7 @@ local assignFootmanEquipment = function() {
 			else
 				helmet = new("scripts/items/helmets/mail_coif");
 		}
-	}
-	else if (banner <= 7) {
+	} else if (banner <= 7) {
 		r = Math.rand(1, 4);
 
 		if (r == 1) {
@@ -137,16 +137,14 @@ local assignFootmanEquipment = function() {
 				helmet = new("scripts/items/helmets/closed_conic_helmet");
 			else
 				helmet = new("scripts/items/helmets/nasal_helmet");
-		}
-		else if (r == 2) {
+		} else if (r == 2) {
 			if (::mods_getRegisteredMod("sato_additional_equipment") != null && shouldUpgradeEquipment && Math.rand(1, 10) == 1)
 				helmet = new("scripts/items/helmets/closed_conic_helmet_with_neckguard");
 			else
 				helmet = new("scripts/items/helmets/padded_nasal_helmet");
-		}
-		else if (r == 3)
+		} else if (r == 3) {
 			helmet = new("scripts/items/helmets/nasal_helmet_with_mail");
-		else {
+		} else {
 			if (shouldUpgradeEquipment) {
 				if (::mods_getRegisteredMod("sato_additional_equipment") != null && Math.rand(1, 10) == 1)
 					helmet = new("scripts/items/helmets/closed_conic_helmet_with_mail");
@@ -171,118 +169,115 @@ local getKnightWeaponForFaction = function(faction, canEquipTwoHanders) {
 	local oneHandedWeapons = [];
 	local twoHandedWeapons = [];
 
+	// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
 	if (faction.hasTrait(Const.FactionTrait.Marauder)) {
-		// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
 		oneHandedWeapons.extend([ "scripts/items/weapons/warhammer" ]);
 		twoHandedWeapons.extend([ "scripts/items/weapons/two_handed_hammer" ]);
+
 		if (Const.DLC.Unhold) {
 			oneHandedWeapons.extend([ "scripts/items/weapons/three_headed_flail" ]);
 			twoHandedWeapons.extend([ "scripts/items/weapons/two_handed_flail" ]);
 		}
 	}
 
+	// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
 	if (faction.hasTrait(Const.FactionTrait.Warmonger)) {
-		// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
 		oneHandedWeapons.extend([ "scripts/items/weapons/warhammer", "scripts/items/weapons/warhammer", "scripts/items/weapons/winged_mace" ]);
 		twoHandedWeapons.extend([ "scripts/items/weapons/two_handed_hammer" ]);
+
 		if (Const.DLC.Unhold)
 			twoHandedWeapons.extend([ "scripts/items/weapons/two_handed_flanged_mace" ]);
 	}
 
+	// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
 	if (faction.hasTrait(Const.FactionTrait.ManOfThePeople)) {
-		// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
 		oneHandedWeapons.extend([ "scripts/items/weapons/noble_sword" ]);
 		twoHandedWeapons.extend([ "scripts/items/weapons/greatsword" ]);
 	}
 
+	// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
 	if (faction.hasTrait(Const.FactionTrait.Tyrant)) {
-		// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
 		oneHandedWeapons.extend([ "scripts/items/weapons/fighting_axe" ]);
 		twoHandedWeapons.extend([ "scripts/items/weapons/greataxe" ]);
 	}
 
+	// (Sheriff, Man of the People) (Sheriff, Collector)
 	if (faction.hasTrait(Const.FactionTrait.Sheriff)) {
-		// (Sheriff, Man of the People) (Sheriff, Collector)
 		oneHandedWeapons.extend([
 			"scripts/items/weapons/noble_sword",
 			"scripts/items/weapons/noble_sword",
 			"scripts/items/weapons/winged_mace",
 			"scripts/items/weapons/winged_mace"
 		]);
-		if (Const.DLC.Unhold) {
+
+		if (Const.DLC.Unhold)
 			twoHandedWeapons.extend(["scripts/items/weapons/two_handed_flanged_mace"]);
-		}
 	}
 
+	// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
 	if (faction.hasTrait(Const.FactionTrait.Collector)) {
-		// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
 		oneHandedWeapons.extend([ "scripts/items/weapons/noble_sword" ]);
-		if (Const.DLC.Wildmen) {
+
+		if (Const.DLC.Wildmen)
 			twoHandedWeapons.extend([ "scripts/items/weapons/bardiche" ]);
-		}
 	}
 
+	// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
 	if (faction.hasTrait(Const.FactionTrait.Schemer)) {
-		// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
 		oneHandedWeapons.extend([ "scripts/items/weapons/noble_sword", "scripts/items/weapons/warhammer" ]);
 		twoHandedWeapons.extend([ "scripts/items/weapons/two_handed_hammer" ]);
 	}
 
 	local weaponList = [];
 	weaponList.extend(oneHandedWeapons);
+
 	if (canEquipTwoHanders)
 		weaponList.extend(twoHandedWeapons);
 
-	local weapon = new(weaponList[Math.rand(0, weaponList.len() - 1)]);
-	return weapon;
+	return new(weaponList[Math.rand(0, weaponList.len() - 1)]);
 };
 
 local getKnightArmorForFaction = function(faction) {
 	local armorList = [];
 
-	if (faction.hasTrait(Const.FactionTrait.Marauder)) {
-		// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
+	// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Marauder))
 		armorList.extend([ "scripts/items/armor/reinforced_mail_hauberk", "scripts/items/armor/lamellar_harness", "scripts/items/armor/heavy_lamellar_armor" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.Warmonger)) {
-		// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
+	// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Warmonger))
 		armorList.extend([ "scripts/items/armor/coat_of_plates", "scripts/items/armor/coat_of_scales", "scripts/items/armor/heavy_lamellar_armor" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.ManOfThePeople)) {
-		// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
+	// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
+	if (faction.hasTrait(Const.FactionTrait.ManOfThePeople))
 		armorList.extend([ "scripts/items/armor/coat_of_plates", "scripts/items/armor/coat_of_scales", "scripts/items/armor/scale_armor" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.Tyrant)) {
-		// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
+	// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
+	if (faction.hasTrait(Const.FactionTrait.Tyrant))
 		armorList.extend([ "scripts/items/armor/coat_of_plates", "scripts/items/armor/lamellar_harness" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.Sheriff)) {
-		// (Sheriff, Man of the People) (Sheriff, Collector)
+	// (Sheriff, Man of the People) (Sheriff, Collector)
+	if (faction.hasTrait(Const.FactionTrait.Sheriff))
 		armorList.extend([ "scripts/items/armor/lamellar_harness", "scripts/items/armor/scale_armor" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.Collector)) {
-		// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
+	// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
+	if (faction.hasTrait(Const.FactionTrait.Collector))
 		armorList.extend([ "scripts/items/armor/coat_of_plates", "scripts/items/armor/coat_of_scales" ]);
-	}
 
-	if (faction.hasTrait(Const.FactionTrait.Schemer)) {
-		// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
+	// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Schemer))
 		armorList.extend([ "scripts/items/armor/coat_of_plates", "scripts/items/armor/reinforced_mail_hauberk" ]);
-	}
 
 	local r = Math.rand(0, armorList.len() - 1);
 	local armor = new(armorList[r]);
+
 	if (armorList[r] == "scripts/items/armor/scale_armor")
 		armor.setVariant(33);
 	else if (armorList[r] == "scripts/items/armor/coat_of_scales")
 		armor.setVariant(38);
 	else if (armorList[r] == "scripts/items/armor/coat_of_plates")
 		armor.setVariant(37);
+
 	return armor;
 };
 
@@ -290,34 +285,33 @@ local getKnightArmorForFaction = function(faction) {
 local getKnightPerkListForFaction = function(faction) {
 	local perkList = [];
 
-	if (faction.hasTrait(Const.FactionTrait.Marauder)) {
-		// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
+	// (Warmonger, Marauder) (Tyrant, Marauder) (Schemer, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Marauder))
 		perkList.extend(["scripts/skills/perks/perk_backstabber"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.Warmonger)) {
-		// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
+
+	// (Warmonger, Man of the People) (Warmonger, Tyrant) (Warmonger, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Warmonger))
 		perkList.extend(["scripts/skills/perks/perk_duelist"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.ManOfThePeople)) {
-		// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
+
+	// (Warmonger, Man of the People) (Sheriff, Man of the People) (Collector, Man of the People)
+	if (faction.hasTrait(Const.FactionTrait.ManOfThePeople))
 		perkList.extend(["scripts/skills/perks/perk_fortified_mind"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.Tyrant)) {
-		// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
+
+	// (Tyrant, Marauder) (Warmonger, Tyrant) (Schemer, Tyrant)
+	if (faction.hasTrait(Const.FactionTrait.Tyrant))
 		perkList.extend(["scripts/skills/perks/perk_fearsome"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.Sheriff)) {
-		// (Sheriff, Man of the People) (Sheriff, Collector)
+
+	// (Sheriff, Man of the People) (Sheriff, Collector)
+	if (faction.hasTrait(Const.FactionTrait.Sheriff))
 		perkList.extend(["scripts/skills/perks/perk_lone_wolf"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.Collector)) {
-		// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
+
+	// (Sheriff, Collector) (Collector, Man of the People) (Schemer, Collector)
+	if (faction.hasTrait(Const.FactionTrait.Collector))
 		perkList.extend(["scripts/skills/perks/perk_head_hunter"]);
-	}
-	if (faction.hasTrait(Const.FactionTrait.Schemer)) {
-		// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
+
+	// (Schemer, Collector) (Schemer, Tyrant) (Schemer, Marauder)
+	if (faction.hasTrait(Const.FactionTrait.Schemer))
 		perkList.extend(["scripts/skills/perks/perk_anticipation"]);
-	}
 
 	local perk = perkList[Math.rand(0, perkList.len() - 1)];
 	return perk;
@@ -325,14 +319,17 @@ local getKnightPerkListForFaction = function(faction) {
 
 local assignKnightEquipment = function() {
 	local r;
-	local banner = 4;
+	local banner = getFaction();
 
-	local useFactionTraits = ("State" in Tactical) && Tactical.State != null && !Tactical.State.isScenarioMode();
+	local useFactionTraits = ("State" in Tactical) && Tactical.State != null && !Tactical.State.isScenarioMode() && banner != 0;
 	local canEquipTwoHanders = m.Items.hasEmptySlot(Const.ItemSlot.Offhand);
 	local shouldEquipShield = true;
 	local weapon;
 	local armor;
 	local perk;
+
+	if (banner < 1)
+		banner = 4;
 
 	if (useFactionTraits) {
 		local faction = World.FactionManager.getFaction(getFaction());
@@ -344,10 +341,7 @@ local assignKnightEquipment = function() {
 		}
 		banner = faction.getBanner();
 		weapon = getKnightWeaponForFaction(faction, canEquipTwoHanders);
-	}
-	else {
-		banner = getFaction();
-
+	} else {
 		local perkList = [
 			"scripts/skills/perks/perk_anticipation",
 			"scripts/skills/perks/perk_backstabber",
@@ -357,7 +351,9 @@ local assignKnightEquipment = function() {
 			"scripts/skills/perks/perk_head_hunter",
 			"scripts/skills/perks/perk_lone_wolf"
 		];
+
 		perk = perkList[Math.rand(0, perkList.len() - 1)];
+
 		if (perk == "scripts/skills/perks/perk_duelist") {
 			canEquipTwoHanders = false;
 			shouldEquipShield = false;
@@ -369,6 +365,7 @@ local assignKnightEquipment = function() {
 			"scripts/items/weapons/winged_mace",
 			"scripts/items/weapons/warhammer"
 		];
+
 		if (canEquipTwoHanders) {
 			weaponList.extend([
 				"scripts/items/weapons/greatsword",
@@ -389,6 +386,7 @@ local assignKnightEquipment = function() {
 				]);
 			}
 		}
+
 		weapon = new(weaponList[Math.rand(0, weaponList.len() - 1)]);
 
 		local armorList = [
@@ -402,6 +400,7 @@ local assignKnightEquipment = function() {
 
 		r = Math.rand(0, armorList.len() - 1);
 		armor = new(armorList[r]);
+
 		if (armorList[r] == "scripts/items/armor/scale_armor")
 			armor.setVariant(33);
 		else if (armorList[r] == "scripts/items/armor/coat_of_scales")
@@ -429,8 +428,7 @@ local assignKnightEquipment = function() {
 			local helmet = new("scripts/items/helmets/full_helm");
 			helmet.setPlainVariant();
 			m.Items.equip(helmet);
-		}
-		else if (r == 2) {
+		} else if (r == 2) {
 			local helm = new("scripts/items/helmets/faction_helm");
 			helm.setVariant(banner);
 			m.Items.equip(helm);
@@ -440,12 +438,13 @@ local assignKnightEquipment = function() {
 
 local assignZweihanderEquipment = function() {
 	local r;
-	local banner = 3;
+	local banner = getFaction();
 
-	if (!Tactical.State.isScenarioMode())
+	if (!Tactical.State.isScenarioMode() && banner != 0)
 		banner = World.FactionManager.getFaction(getFaction()).getBanner();
-	else
-		banner = getFaction();
+
+	if (banner < 1)
+		banner = 4;
 
 	m.Surcoat = banner;
 
@@ -473,12 +472,13 @@ local assignZweihanderEquipment = function() {
 
 	r = Math.rand(0, armorList.len() - 1);
 	local armor = new(armorList[r]);
-	if (armorList[r] == "scripts/items/armor/mail_hauberk")
+
+	if (armorList[r] == "scripts/items/armor/mail_hauberk") {
 		armor.setVariant(28);
-	else if (::mods_getRegisteredMod("sato_additional_equipment") != null) {
-		if (armorList[r] == "scripts/items/armor/footman_armor")
+	} else if (::mods_getRegisteredMod("sato_additional_equipment") != null) {
+		if (armorList[r] == "scripts/items/armor/footman_armor") {
 			armor.setVariant(84);
-		else if (armorList[r] == "scripts/items/armor/noble_mail_armor") {
+		} else if (armorList[r] == "scripts/items/armor/noble_mail_armor") {
 			if (banner == 1)
 				armor.setVariant(215); // Blue-Red
 			else if (banner == 2)
@@ -505,9 +505,9 @@ local assignZweihanderEquipment = function() {
 
 	r = Math.rand(1, 2);
 
-	if (r == 1)
+	if (r == 1) {
 		m.Items.equip(new("scripts/items/helmets/greatsword_hat"));
-	else if (r == 2) {
+	} else if (r == 2) {
 		local helm = new("scripts/items/helmets/greatsword_faction_helm");
 		helm.setVariant(banner);
 		m.Items.equip(helm);

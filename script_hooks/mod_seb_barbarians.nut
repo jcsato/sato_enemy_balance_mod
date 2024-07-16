@@ -2,7 +2,9 @@
 ::Const.Tactical.Actor.BarbarianMarauder.Bravery = 60;					// Default is 80
 ::Const.Tactical.Actor.BarbarianChampion.FatigueRecoveryRate = 17;		// Default is 20
 ::Const.Tactical.Actor.BarbarianChampion.Bravery = 75;					// Default is 90
-::Const.World.Spawn.Troops.BarbarianChampion.Cost = 45;					// Default is 35
+::Const.World.Spawn.Troops.BarbarianChampion.Cost = 38;					// Default is 35
+::Const.World.Spawn.Troops.BarbarianMarauder.Cost = 28;					// Default is 25
+::Const.World.Spawn.Troops.BarbarianUnhold.Cost = 58;					// Default is 55
 ::Const.World.Spawn.Troops.BarbarianDrummer.Row = 1;					// Default is 2
 
 ::mods_hookExactClass("states/world_state", function(ws) {
@@ -40,8 +42,48 @@
 	ws.onInit = function() {
 		onInit();
 
+		// This was originally specified outside of a hook; however, it wasn't picked up before calculateCosts was run,
+		//  causing the new parties to not have an associate `Cost` and causing softlocks.
+		::Const.World.Spawn.Barbarians.extend([
+			{
+				Body = "figure_wildman_03",
+				Troops = [
+					{ Type = this.Const.World.Spawn.Troops.BarbarianMarauder, Num = 6 },
+					{ Type = this.Const.World.Spawn.Troops.BarbarianChampion, Num = 2 }
+				]
+			},
+			{
+				Body = "figure_wildman_03",
+				Troops = [
+					{ Type = this.Const.World.Spawn.Troops.BarbarianMarauder, Num = 6 },
+					{ Type = this.Const.World.Spawn.Troops.BarbarianChampion, Num = 3 }
+				]
+			},
+			{
+				Body = "figure_wildman_03",
+				Troops = [
+					{ Type = this.Const.World.Spawn.Troops.BarbarianMarauder, Num = 8 },
+					{ Type = this.Const.World.Spawn.Troops.BarbarianChampion, Num = 3 }
+				]
+			},
+			{
+				Body = "figure_wildman_03",
+				Troops = [
+					{ Type = this.Const.World.Spawn.Troops.BarbarianMarauder, Num = 4 }
+				]
+			},
+		]);
+
 		calculateCosts(::Const.World.Spawn.Barbarians);
 	}
+});
+
+::mods_hookNewObject("entity/world/locations/barbarian_camp_location", function(bcl) {
+	bcl.m.Resources = 170;	// Default is 180
+});
+
+::mods_hookNewObject("entity/world/locations/barbarian_sanctuary_location", function(bsl) {
+	bsl.m.Resources = 310;	// Default is 325
 });
 
 ::mods_hookExactClass("entity/tactical/humans/barbarian_thrall", function(bt) {
@@ -93,16 +135,6 @@
 		getSkills().removeByID("perk.recover");
 		getSkills().removeByID("perk.brawny");
 		getSkills().removeByID("effects.dodge");
-	});
-});
-
-::mods_hookExactClass("ai/tactical/agents/barbarian_drummer_agent", function(bda) {
-	local onAddBehaviors = ::mods_getMember(bda, "onAddBehaviors");
-
-	::mods_override(bda, "onAddBehaviors", function() {
-		onAddBehaviors();
-
-		addBehavior(new("scripts/ai/tactical/behaviors/ai_engage_melee"));
 	});
 });
 
